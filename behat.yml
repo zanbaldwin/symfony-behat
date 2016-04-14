@@ -1,0 +1,15 @@
+default:
+    extensions:
+        # For injecting Symfony services into the Behat context class.
+        Behat\Symfony2Extension: ~
+        # For using Symfony's BrowserKit component as the Mink WebDriver.
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
+    suites:
+        # Define a suite to specify where to find the ".feature" files and which contexts to use.
+        app:
+            paths: [ "%paths.base%/tests/features/app" ]
+            contexts:
+                - AppBundleTests\Context\AppContext
