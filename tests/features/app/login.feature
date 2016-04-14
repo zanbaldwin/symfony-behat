@@ -9,7 +9,7 @@ Feature: Login
             | username | admin  |
             | password | secret |
         And I press "Login"
-        And I should be on the homepage
+        Then I should be on the homepage
 
     Scenario: Ensure I do not get logged in if the credentials are wrong
         Given I am on "/login"
@@ -17,5 +17,5 @@ Feature: Login
             | username | admin          |
             | password | wrong_password |
         And I press "Login"
-        And I should not be on the homepage
+        Then I should not be on the homepage
         And I should see "Invalid credentials"
