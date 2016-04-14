@@ -1,0 +1,10 @@
+/app/config/parameters.yml
+/app/phpunit.xml
+/build/
+/vendor/
+/web/bundles/
+
+/var/bootstrap.php.cache
+/var/SymfonyRequirements.php
+/composer.phar
+
