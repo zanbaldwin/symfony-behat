@@ -1,68 +1,41 @@
-Symfony Standard Edition
-========================
+# Using [Behat][behat] with [Symfony][symfony]
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+Behat is a testing library that uses Gherkin, a format for writing tests in natural language. This means they can be written in any language (English, Tagalog, etc) and understood by people who don't know PHP.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+```bash
+# Clone the repository.
+$ git clone git@github.com:zanderbaldwin/symfony-behat.git
+# Setup the project.
+$ cd symfony-behat
+$ composer install
+# Run the functional tests.
+$ bin/behat
+```
 
-What's inside?
---------------
+## Important Files
 
-The Symfony Standard Edition is configured with the following defaults:
+- All `*.feature` files for the application inside [`tests/features/app`](tests/features/app).
+- The application context class, [`AppContext`](tests/Context/AppContext.php).
+- The Behat configuration file, [`behat.yml`](behat.yml).
 
-  * An AppBundle you can use to start coding;
+Feature files consist of [steps][writingfeatures] that explain step by step how to test something. Once you have written steps inside your feature files, you then create methods inside the Context class(es) that define how those steps should be executed (these are called [step definitions][stepdefinitions]).
 
-  * Twig as the only configured template engine;
+Another important file is the [`MinkContext`][minkcontext] - it contains lots of helper step definitions for you to use straight away. The [`AppContext`](tests/Context/AppContext.php) extends this class and therefore inherits all of its step definitions so you don't have to write them all again.
+To list all step definitions that are defined, execute the command `bin/behat -d l` (which is a shortcut for the command `bin/behat --definitions=l`).
 
-  * Doctrine ORM/DBAL;
+## Behat Defaults
 
-  * Swiftmailer;
+By default (no custom configuration), Behat will look for:
+- Feature files inside `features` instead of `tests/features`.
+- Context classes inside `features/bootstrap` instead of `tests/Context`.
 
-  * Annotations enabled for everything.
+I changed the default location of these files (via the `behat.yml` configuration file) because of *personal preference*,
+not because it is better.
 
-It comes pre-configured with the following bundles:
+Some people install Behat globally (to the computer) and use the `behat` command, instead of per-project and using the `bin/behat` command. Installing it globally means that the classes normally autoloaded by Composer won't get autoloaded.
 
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/2.8/book/installation.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/2.8/book/doctrine.html
-[8]:  https://symfony.com/doc/2.8/book/templating.html
-[9]:  https://symfony.com/doc/2.8/book/security.html
-[10]: https://symfony.com/doc/2.8/cookbook/email.html
-[11]: https://symfony.com/doc/2.8/cookbook/logging/monolog.html
-[13]: https://symfony.com/doc/2.8/bundles/SensioGeneratorBundle/index.html
+[behat]: http://behat.org
+[symfony]: https://symfony.com
+[minkcontext]: https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Context/MinkContext.php
+[writingfeatures]: http://docs.behat.org/en/v3.0/guides/1.gherkin.html
+[stepdefinitions]: http://docs.behat.org/en/v3.0/guides/2.definitions.html
