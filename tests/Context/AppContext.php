@@ -3,6 +3,7 @@
 namespace AppBundleTests\Context;
 
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Gherkin\Node\PyStringNode;
 use Behat\MinkExtension\Context\MinkContext;
 
 class AppContext extends MinkContext implements SnippetAcceptingContext
@@ -34,7 +35,7 @@ class AppContext extends MinkContext implements SnippetAcceptingContext
      *       {"id":123,"message":"Example data to send with the POST request (called the body)."}
      *       """
      */
-    public function stepDefinitionExample($url, $method = 'GET', $version = 6, TableNode $body = null)
+    public function stepDefinitionExample($url, $method = 'GET', $version = 6, PyStringNode $body = null)
     {
         // Do the thing!
     }
